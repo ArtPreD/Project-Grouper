@@ -1,0 +1,104 @@
+body{
+    padding-top: 70px;
+    color: #113;
+    background-origin: padding-box;
+    background: transparent url("http://turist100.ru/photo/8/malinovyy_oranzhevyy_ottenok_sirenevyy_fon_1920x1080.jpg") no-repeat fixed center top;
+    -webkit-background-size: 100% auto;
+    -moz-background-size: 100% auto;
+    background-size: 100% auto;
+}
+
+.section {
+    background-color: #fff;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+
+.section-main {
+    background-color: #fff;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    min-height: 90vh;
+}
+
+.section-un{
+    background-color: #fff;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    min-height: 80vh;
+    height: 90vh;
+    max-height: 90vh;
+    position: fixed;
+}
+
+.about{
+    border: 4px dashed #9d7cd5;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.img-circle {
+    border: 3px solid white;
+    border-radius: 50%;
+}
+
+#header {
+    background-image: url("https://www.swd-sochi.ru/bitrix/templates/swd-sochi/images/header.jpg");
+    background-size: cover;
+}
+
+.form-group{
+    margin-bottom: 15px;
+}
+
+span.input-group-addon i {
+    color: #009edf;
+    font-size: 17px;
+}
+
+.main-form{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    max-width: 400px;
+    padding: 10px 40px;
+    background: #ffffff;
+    color: #000000;
+    text-shadow: none;
+    border-radius: 10px;
+    box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.31);
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.form-control {
+    height: auto!important;
+    padding: 8px 12px !important;
+}
+.input-group {
+    box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.21)!important;
+}
+
+div.scrollup {
+    position: fixed;
+    color: #fff;
+    background-color: #007bff;
+    right: 40px;
+    bottom: 50px;
+    padding: 4px 10px;
+    font-size: 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: none;
+    text-align: center;
+}
+div.scrollup:hover {
+    background-color: #000;
+}
+
