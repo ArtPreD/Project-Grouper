@@ -1,5 +1,6 @@
 package ua.com.meraya.grouper.database.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -30,6 +31,7 @@ public class UserService implements UserDetailsService{
         this.mailSender = mailSender;
         this.passwordEncoder = passwordEncoder;
     }
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

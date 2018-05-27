@@ -1,0 +1,19 @@
+## Java
+
+*.class
+*.war
+*.ear
+hs_err_pid*
+
+
+
+## Intellij in general
+.idea/
+.target/
+.bootstrap/
+out/
+*.ipr
+*.iws
+*.iml
+/android/out/
+com_crashlytics_export_strings.xml
