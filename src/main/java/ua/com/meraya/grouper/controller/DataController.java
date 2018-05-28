@@ -6,8 +6,10 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ua.com.meraya.grouper.database.entity.University;
 import ua.com.meraya.grouper.database.entity.User;
 import ua.com.meraya.grouper.database.entity.enums.UserRole;
+import ua.com.meraya.grouper.database.service.UniversityService;
 import ua.com.meraya.grouper.database.service.UserService;
 
 import java.util.Comparator;
@@ -21,6 +23,9 @@ public class DataController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private UniversityService universityService;
+
     private int swith = 0;
 
     @PreAuthorize("hasAuthority('SUPERUSER')")
@@ -29,23 +34,32 @@ public class DataController {
         switch (swith){
             case 0:
                 model.addAttribute("select", "users");
+                List<User> users = userService.findAll();
+                users.sort(new Comparator<User>() {
+                    @Override
+                    public int compare(User o1, User o2) {
+                        return (int) (o1.getId() - o2.getId());
+                    }
+                });
+                model.addAttribute("users", users);
                 break;
             case 1:
                 model.addAttribute("select", "university");
+                List<University> universities = universityService.findAll();
+                universities.sort(new Comparator<University>() {
+                    @Override
+                    public int compare(University o1, University o2) {
+                        return (int) (o1.getId() - o2.getId());
+                    }
+                });
+                model.addAttribute("universities", universities);
                 break;
             case 2:
                 model.addAttribute("select", "group");
                 break;
         }
 
-        List<User> users = userService.findAll();
-        users.sort(new Comparator<User>() {
-            @Override
-            public int compare(User o1, User o2) {
-                return (int) (o1.getId() - o2.getId());
-            }
-        });
-        model.addAttribute("users", users);
+
         return "dataList";
     }
 

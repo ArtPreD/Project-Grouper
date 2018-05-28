@@ -23,7 +23,7 @@ public class UniversityService {
         users.remove(user);
         university.getStudents().clear();
         university.setStudents(users);
-        universityRepository.save(university);
+
     }
 
     public List<University> findAll(){

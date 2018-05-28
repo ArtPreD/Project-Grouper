@@ -33,9 +33,19 @@ public class Group implements Serializable {
     @Column(name = "places")
     @Setter @Getter private int places;
 
+    @Column(name = "messages")
+    @Setter @Getter private int messages;
+
+    @Column(name = "stat_count")
+    @Setter @Getter private int stat;
+
     @ElementCollection(targetClass = User.class, fetch = FetchType.LAZY)
     @CollectionTable(name = "groups_students", joinColumns = @JoinColumn(name = "group_id"))
     @Setter @Getter private Set<User> students;
+
+    @ElementCollection(targetClass = User.class, fetch = FetchType.LAZY)
+    @CollectionTable(name = "groups_statements", joinColumns = @JoinColumn(name = "group_id"))
+    @Setter @Getter private Set<User> statements;
 
 //    @ElementCollection(targetClass = Discipline.class, fetch = FetchType.EAGER)
 //    @CollectionTable(name = "groups_disciplines", joinColumns = @JoinColumn(name = "discipline_id"))
@@ -60,5 +70,7 @@ public class Group implements Serializable {
         this.places = 40;
         this.teacher = teacher;
         this.university = university;
+        this.messages = 0;
+        this.stat = 0;
     }
 }

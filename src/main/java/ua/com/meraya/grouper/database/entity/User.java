@@ -17,7 +17,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "users")
-public class User implements UserDetails, Serializable {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(generator = "increment")
@@ -58,22 +58,24 @@ public class User implements UserDetails, Serializable {
     @ElementCollection(targetClass = UserRole.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
-    @Setter @Getter Set<UserRole> roles;
+    @Setter @Getter private Set<UserRole> roles;
 
     @Column(name = "active")
-    @Setter @Getter boolean isActive;
+    @Setter @Getter private boolean isActive;
 
     @Column(name = "teacher")
-    @Setter @Getter
-    private boolean isBound;
+    @Setter @Getter private boolean isBound;
+
+    @Column(name = "stat")
+    @Setter @Getter private boolean isStat;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "group_id")
-    @Setter @Getter Group group;
+    @Setter @Getter private Group group;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE})
     @JoinColumn(name = "university_id")
-    @Setter @Getter University university;
+    @Setter @Getter private University university;
 
     @SuppressWarnings("UnusedDeclaration")
     public User() {

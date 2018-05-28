@@ -9,10 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ua.com.meraya.grouper.database.entity.User;
 import ua.com.meraya.grouper.database.repository.UserRepository;
+import ua.com.meraya.grouper.database.service.GroupService;
 import ua.com.meraya.grouper.database.service.UniversityService;
 import ua.com.meraya.grouper.database.service.UserService;
 
-import java.util.Collections;
+
 
 @Controller
 @RequestMapping("/user")
@@ -21,11 +22,14 @@ public class UserController {
     private final UserService userService;
     private final UniversityService universityService;
     private final UserRepository userRepository;
+    private   final GroupService groupService;
 
-    public UserController(UserService userService, UniversityService universityService, UserRepository userRepository) {
+    public UserController(UserService userService, UniversityService universityService,
+                          UserRepository userRepository, GroupService groupService) {
         this.userService = userService;
         this.universityService = universityService;
         this.userRepository = userRepository;
+        this.groupService = groupService;
     }
 
     @GetMapping("/profile")
@@ -40,7 +44,8 @@ public class UserController {
                 model.addAttribute("groups", user.getUniversity().getGroups());
             }
         }
-        model.addAttribute("teacher", user.getGroup());
+        model.addAttribute("group", user.getGroup());
+        model.addAttribute("stat", user.isStat());
 
         return "profile";
     }
@@ -50,7 +55,8 @@ public class UserController {
             @AuthenticationPrincipal User u,
             @RequestParam String password,
             @RequestParam String email,
-            @RequestParam String university
+            @RequestParam String university,
+            @RequestParam String group
     ){
         User user = userRepository.findByUsername(u.getUsername());
         if (user.getUniversity() == null){
@@ -58,6 +64,13 @@ public class UserController {
         }else {
             universityService.deleteUserFromUniversity(user);
             userService.updateProfile(user, password, email, university);
+        }
+
+        if(user.getGroup() == null){
+            if(!group.equals("Выбери...")){
+//                user.setGroup(groupService.findByNameAndUniversity(group, user.getUniversity()));
+                groupService.addStatUserIntoGroup(group, user);
+            }
         }
 
         return "redirect:/user/profile";

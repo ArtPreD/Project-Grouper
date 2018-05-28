@@ -1,12 +1,12 @@
 package ua.com.meraya.grouper.database.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+import ua.com.meraya.grouper.database.entity.Group;
 import ua.com.meraya.grouper.database.entity.University;
 import ua.com.meraya.grouper.database.entity.User;
 import ua.com.meraya.grouper.database.entity.enums.UserRole;
@@ -106,6 +106,10 @@ public class UserService implements UserDetailsService{
             }
         }
         userRepository.saveAndFlush(user);
+    }
+
+    public void updateUser(User user){
+        userRepository.save(user);
     }
 
     public void updateProfile(User user, String password, String email, String university) {

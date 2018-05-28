@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import ua.com.meraya.grouper.controller.utils.ControllerUtils;
+import ua.com.meraya.grouper.database.entity.Group;
 import ua.com.meraya.grouper.database.entity.Message;
 import ua.com.meraya.grouper.database.entity.User;
 import ua.com.meraya.grouper.database.repository.MessageRepository;
 import ua.com.meraya.grouper.database.repository.UserRepository;
+import ua.com.meraya.grouper.database.service.GroupService;
 
 import javax.validation.Valid;
 import javax.xml.crypto.Data;
@@ -35,6 +37,9 @@ public class MainController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private GroupService groupService;
 
     @Value("${upload.path}")
     private String uploadPath;
@@ -85,8 +90,9 @@ public class MainController {
         SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
         String date = format.format(d);
         User user = userRepository.findByUsername(u.getUsername());
+        Group group = user.getGroup();
         message.setAuthor(user);
-        message.setGroup(user.getGroup());
+        message.setGroup(group);
 
         if(bindingResult.hasErrors()){
             Map<String, String> errorsMap = ControllerUtils.getErrors(bindingResult);
@@ -106,6 +112,8 @@ public class MainController {
             }
             model.addAttribute("message", null);
             messageRepository.save(message);
+            group.setMessages(group.getMessages()+1);
+            groupService.updateGroup(group);
         }
 
         Iterable<Message> messages = Collections.emptyList();
