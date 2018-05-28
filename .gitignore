@@ -9,8 +9,7 @@ hs_err_pid*
 
 ## Intellij in general
 .idea/
-.target/
-.bootstrap/
+target/
 out/
 *.ipr
 *.iws
