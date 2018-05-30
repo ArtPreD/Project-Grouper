@@ -6,12 +6,13 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
-import ua.com.meraya.grouper.database.entity.Group;
 import ua.com.meraya.grouper.database.entity.University;
 import ua.com.meraya.grouper.database.entity.User;
 import ua.com.meraya.grouper.database.entity.enums.UserRole;
 import ua.com.meraya.grouper.database.repository.UniversityRepository;
 import ua.com.meraya.grouper.database.repository.UserRepository;
+import ua.com.meraya.grouper.database.service.mailsender.MailSender;
+import ua.com.meraya.grouper.database.service.mailsender.MessageGenerator;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -63,17 +64,8 @@ public class UserService implements UserDetailsService{
     }
 
     private void sendMessage(User user) {
-        if (!StringUtils.isEmpty(user.getEmail())){
-            String message = String.format(
-              "Hello, %s %s! \n" +
-                      "Welcome to Grouper! Please, click the link to activate your account: " +
-                      "http://localhost:8080/activate/%s",
-                    user.getLast_name(),
-                    user.getFirst_name(),
-                    user.getActivationCode()
-            );
-            mailSender.send(user.getEmail(), "Activation Grouper account", message);
-        }
+            mailSender.send(user.getEmail(), "Activation Grouper account",
+                    MessageGenerator.registrationMessage(user));
     }
 
     public boolean activateUser(String code) {

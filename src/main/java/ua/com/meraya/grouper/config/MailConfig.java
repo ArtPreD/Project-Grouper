@@ -28,9 +28,8 @@ public class MailConfig {
     @Value("${mail.debug}")
     private String debug;
 
-
     @Bean
-    public JavaMailSender getMailSender(){
+    public JavaMailSender getMailSender() {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
 
         mailSender.setHost(host);
@@ -42,9 +41,6 @@ public class MailConfig {
         properties.setProperty("mail.transport.protocol", protocol);
         properties.setProperty("mail.debug", debug);
 
-
-
         return mailSender;
     }
-
 }

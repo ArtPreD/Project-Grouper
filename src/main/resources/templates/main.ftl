@@ -54,18 +54,18 @@
             <div><a href=""><h6 align="center">Список участников группы</h6></a></div>
             <div><a href=""><h6 align="center">Сообщения группы</h6></a></div>
             <div><a href=""><h6 align="center">Мои оценки</h6></a></div>
-            <#else>
+               <#else>
              <div class="alert alert-danger" role="alert">
-                <h5 align="center">Для отоброжения информации вы должны состоять в группе</h5>
+                 <h5 align="center">Для отоброжения информации вы должны состоять в группе</h5>
              </div>
-             </#if>
-             </#if>
+               </#if>
+           </#if>
 
         </div>
     <#--Блок с университетом-->
 
     <#--Блок с группой-->
-        <div class="container col-8 section-main">
+    <div class="container col-8 section-main">
             <#if group??>
                 <h5 align="center">Ваша группа: ${group.name} (${group.abbreviation})</h5>
             <#else>
@@ -127,24 +127,24 @@
 
             <h5 align="center">Сообщения группы:</h5>
         <div class="card-columns">
-<#list messages as message>
-    <div class="card my-3">
-        <div>
+        <#list messages as message>
+            <div class="card my-3">
+                <div>
         <#if message.filename??>
             <img class="card-img-top" src="/img/${message.filename}">
         </#if>
-        </div>
-        <div class="m-2"
-        <i>${message.tag}:</i>
-        <span>${message.text}</span>
-    </div>
-    <div class="card-footer text-muted">
-        Автор: ${message.authorName}
-    </div>
+                </div>
+                <div class="m-2"
+                <i>${message.tag}:</i>
+                <span>${message.text}</span>
+            </div>
+            <div class="card-footer text-muted">
+                Автор: ${message.authorName}
+            </div>
 </div>
-<#else>
+        <#else>
 У группы еще нет сообщений
-</#list>
+        </#list>
         </div>
     </#if>
     </div>

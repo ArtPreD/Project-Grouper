@@ -5,13 +5,11 @@ import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.GetMapping;
 import ua.com.meraya.grouper.database.entity.enums.UserRole;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import java.io.Serializable;
 import java.util.Collection;
 import java.util.Set;
 
@@ -90,11 +88,11 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    public boolean isSuperuser(){
+    public boolean isSuperuser() {
         return roles.contains(UserRole.SUPERUSER);
     }
 
-    public boolean isTeacher(){
+    public boolean isTeacher() {
         return roles.contains(UserRole.TEACHER);
     }
 

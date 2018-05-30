@@ -1,4 +1,4 @@
-body{
+body {
     padding-top: 70px;
     color: #113;
     background-origin: padding-box;
@@ -23,7 +23,7 @@ body{
     min-height: 90vh;
 }
 
-.section-un{
+.section-un {
     background-color: #fff;
     padding: 15px;
     margin-bottom: 10px;
@@ -34,7 +34,7 @@ body{
     position: fixed;
 }
 
-.about{
+.about {
     border: 4px dashed #9d7cd5;
     padding-bottom: 5px;
     padding-left: 10px;
@@ -51,7 +51,7 @@ body{
     background-size: cover;
 }
 
-.form-group{
+.form-group {
     margin-bottom: 15px;
 }
 
@@ -60,7 +60,7 @@ span.input-group-addon i {
     font-size: 17px;
 }
 
-.main-form{
+.main-form {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -70,7 +70,7 @@ span.input-group-addon i {
     color: #000000;
     text-shadow: none;
     border-radius: 10px;
-    box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.31);
+    box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.31);
     -webkit-transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     -o-transform: translate(-50%, -50%);
@@ -78,11 +78,12 @@ span.input-group-addon i {
 }
 
 .form-control {
-    height: auto!important;
+    height: auto !important;
     padding: 8px 12px !important;
 }
+
 .input-group {
-    box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.21)!important;
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.21) !important;
 }
 
 div.scrollup {
@@ -98,7 +99,7 @@ div.scrollup {
     display: none;
     text-align: center;
 }
+
 div.scrollup:hover {
     background-color: #000;
 }
-

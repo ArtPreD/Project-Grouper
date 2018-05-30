@@ -33,10 +33,11 @@ public class Message {
 
     @Setter @Getter private String filename;
 
+    @SuppressWarnings("UnusedDeclaration")
     public Message() {
     }
 
-    public String getAuthorName(){
+    public String getAuthorName() {
         return author != null ? author.getUsername() : "<none>";
     }
 

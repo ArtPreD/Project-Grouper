@@ -3,18 +3,14 @@ package ua.com.meraya.grouper.database.entity;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "groups")
 public class Group implements Serializable {
-
 
     @Id
     @GeneratedValue(generator = "increment")
@@ -46,10 +42,6 @@ public class Group implements Serializable {
     @ElementCollection(targetClass = User.class, fetch = FetchType.LAZY)
     @CollectionTable(name = "groups_statements", joinColumns = @JoinColumn(name = "group_id"))
     @Setter @Getter private Set<User> statements;
-
-//    @ElementCollection(targetClass = Discipline.class, fetch = FetchType.EAGER)
-//    @CollectionTable(name = "groups_disciplines", joinColumns = @JoinColumn(name = "discipline_id"))
-//    @Setter @Getter private List<Discipline> disciplines;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "university_id", nullable = false)

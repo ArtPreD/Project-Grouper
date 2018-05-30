@@ -8,7 +8,6 @@ import ua.com.meraya.grouper.database.repository.GroupRepository;
 import ua.com.meraya.grouper.database.repository.UniversityRepository;
 import ua.com.meraya.grouper.database.repository.UserRepository;
 
-import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -25,11 +24,11 @@ public class GroupService {
         this.userRepository = userRepository;
     }
 
-    public Group findByNameAndUniversity(String name, University university){
+    public Group findByNameAndUniversity(String name, University university) {
         return groupRepository.findByNameAndUniversity(name, university);
     }
 
-    public void addGroup(String name, String abbreviation, User user, String univer){
+    public void addGroup(String name, String abbreviation, User user, String univer) {
         University university = universityRepository.findByName(univer);
         Group group = new Group(name, abbreviation, user, university);
         groupRepository.save(group);
@@ -43,29 +42,28 @@ public class GroupService {
         userRepository.save(user);
     }
 
-    public void updateGroup(Group group){
+    public void updateGroup(Group group) {
         groupRepository.save(group);
     }
 
-    public void addStatUserIntoGroup(String g, User user){
+    public void addStatUserIntoGroup(String g, User user) {
         Group group = groupRepository.findByNameAndUniversity(g, user.getUniversity());
         user.setStat(true);
         userRepository.save(user);
         Set<User> statements = group.getStatements();
         statements.add(user);
-        group.setStat(group.getStat() +1);
+        group.setStat(group.getStat() + 1);
     }
 
-    public void deleteStutUserIntoGroup(Group group, User user){
-        //Group group = groupRepository.findByNameAndUniversity(g, user.getUniversity());
+    public void deleteStutUserIntoGroup(Group group, User user) {
         user.setStat(false);
         userRepository.save(user);
         Set<User> statements = group.getStatements();
         statements.remove(user);
-        group.setStat(group.getStat() -1);
+        group.setStat(group.getStat() - 1);
     }
 
-    public void addUserIntoGroup(Group group, User user){
+    public void addUserIntoGroup(Group group, User user) {
         Set<User> students = group.getStudents();
         students.add(user);
         group.setStudents(students);

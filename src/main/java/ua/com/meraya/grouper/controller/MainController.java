@@ -19,10 +19,8 @@ import ua.com.meraya.grouper.database.repository.UserRepository;
 import ua.com.meraya.grouper.database.service.GroupService;
 
 import javax.validation.Valid;
-import javax.xml.crypto.Data;
 import java.io.File;
 import java.io.IOException;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
@@ -32,14 +30,15 @@ import java.util.UUID;
 @Controller
 public class MainController {
 
-    @Autowired
-    private MessageRepository messageRepository;
+    private final MessageRepository messageRepository;
+    private final UserRepository userRepository;
+    private final GroupService groupService;
 
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private GroupService groupService;
+    public MainController(MessageRepository messageRepository, UserRepository userRepository, GroupService groupService) {
+        this.messageRepository = messageRepository;
+        this.userRepository = userRepository;
+        this.groupService = groupService;
+    }
 
     @Value("${upload.path}")
     private String uploadPath;
@@ -61,7 +60,7 @@ public class MainController {
         SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
         String date = format.format(d);
 
-        if(user.getGroup() != null) {
+        if (user.getGroup() != null) {
             if (filter != null && !filter.isEmpty()) {
                 messages = messageRepository.findByTagAndGroup(filter, user.getGroup());
             } else {
@@ -94,12 +93,12 @@ public class MainController {
         message.setAuthor(user);
         message.setGroup(group);
 
-        if(bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             Map<String, String> errorsMap = ControllerUtils.getErrors(bindingResult);
 
             model.mergeAttributes(errorsMap);
             model.addAttribute("message", message);
-        }else {
+        } else {
             if (file != null && !file.getOriginalFilename().isEmpty()) {
                 File uploadDir = new File(uploadPath);
                 if (!uploadDir.exists()) {
@@ -112,13 +111,13 @@ public class MainController {
             }
             model.addAttribute("message", null);
             messageRepository.save(message);
-            group.setMessages(group.getMessages()+1);
+            group.setMessages(group.getMessages() + 1);
             groupService.updateGroup(group);
         }
 
         Iterable<Message> messages = Collections.emptyList();
-        if(user.getGroup() != null) {
-             messages = messageRepository.findByGroup(user.getGroup());
+        if (user.getGroup() != null) {
+            messages = messageRepository.findByGroup(user.getGroup());
         }
 
         model.addAttribute("date", date);
@@ -127,5 +126,4 @@ public class MainController {
         model.addAttribute("messages", messages);
         return "main";
     }
-
 }

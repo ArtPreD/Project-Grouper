@@ -17,16 +17,15 @@ public class UniversityService {
         this.universityRepository = universityRepository;
     }
 
-    public void deleteUserFromUniversity(User user){
+    public void deleteUserFromUniversity(User user) {
         University university = user.getUniversity();
         Set<User> users = university.getStudents();
         users.remove(user);
         university.getStudents().clear();
         university.setStudents(users);
-
     }
 
-    public List<University> findAll(){
+    public List<University> findAll() {
         return universityRepository.findAll();
     }
 }

@@ -6,9 +6,15 @@
 
 <div class="container section col-10">
     <div class="form-row mb-3">
-        <form method="get" action="/data/user"><button type="submit" class="btn btn-secondary ml-2 mr-4">Пользователи</button></form>
-        <form method="get" action="/data/university"><button type="submit" class="btn btn-secondary mr-4">Университеты</button></form>
-        <form method="get" action="/data/group"><button type="submit" class="btn btn-secondary">Группы</button></form>
+        <form method="get" action="/data/user">
+            <button type="submit" class="btn btn-secondary ml-2 mr-4">Пользователи</button>
+        </form>
+        <form method="get" action="/data/university">
+            <button type="submit" class="btn btn-secondary mr-4">Университеты</button>
+        </form>
+        <form method="get" action="/data/group">
+            <button type="submit" class="btn btn-secondary">Группы</button>
+        </form>
     </div>
 
 

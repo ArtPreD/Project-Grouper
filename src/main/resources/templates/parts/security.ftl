@@ -1,18 +1,18 @@
 <#assign
-    known = Session.SPRING_SECURITY_CONTEXT??
+known = Session.SPRING_SECURITY_CONTEXT??
 >
 
 <#if known>
     <#assign
-        user = Session.SPRING_SECURITY_CONTEXT.authentication.principal
-        name = user.getUsername()
-        bound = user.isBound()
-        isSuperuser = user.isSuperuser()
-        isTeacher = user.isTeacher()
+    user = Session.SPRING_SECURITY_CONTEXT.authentication.principal
+    name = user.getUsername()
+    bound = user.isBound()
+    isSuperuser = user.isSuperuser()
+    isTeacher = user.isTeacher()
     >
 <#else>
     <#assign
-        isSuperuser = false
-        isTeacher = false
+    isSuperuser = false
+    isTeacher = false
     >
 </#if>

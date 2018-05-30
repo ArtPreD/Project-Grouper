@@ -61,7 +61,7 @@
                 <div class="input-group-prepend">
                     <div class="input-group-text"><i class="fa fa-address-card-o" aria-hidden="true"></i></div>
                 </div>
-                <input type="text" class="form-control ${(firstNameError??)?string('is-invalid', '')}" name="first_name" id="first_name" placeholder="Ваше имя">
+                <input type="text" class="form-control ${(firstNameError??)?string('is-invalid', '')}" name="first_name" id="first_name" placeholder="Ваше имя" required>
                 <#if firstNameError??>
                 <div class="invalid-feedback">
                     ${firstNameError}
@@ -77,7 +77,7 @@
             <div class="input-group-prepend">
                 <div class="input-group-text"><i class="fa fa-address-card-o" aria-hidden="true"></i></div>
             </div>
-            <input type="text" class="form-control ${(lastNameError??)?string('is-invalid', '')}" name="last_name" id="last_name" placeholder="Ваша фамилия">
+            <input type="text" class="form-control ${(lastNameError??)?string('is-invalid', '')}" name="last_name" id="last_name" placeholder="Ваша фамилия" required>
         <#if lastNameError??>
                 <div class="invalid-feedback">
                     ${lastNameError}

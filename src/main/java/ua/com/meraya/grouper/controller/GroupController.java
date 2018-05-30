@@ -1,6 +1,5 @@
 package ua.com.meraya.grouper.controller;
 
-import jdk.nashorn.internal.objects.annotations.Getter;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -15,18 +14,14 @@ import ua.com.meraya.grouper.database.repository.UserRepository;
 import ua.com.meraya.grouper.database.service.GroupService;
 import ua.com.meraya.grouper.database.service.UniversityService;
 
-import java.util.Map;
-
 @Controller
 @PreAuthorize("hasAuthority('TEACHER')")
 public class GroupController {
 
-    private final UniversityService universityService;
     private final GroupService groupService;
     private final UserRepository userRepository;
 
     public GroupController(UniversityService universityService, GroupService groupService, UserRepository userRepository) {
-        this.universityService = universityService;
         this.groupService = groupService;
         this.userRepository = userRepository;
     }
@@ -37,7 +32,7 @@ public class GroupController {
             @RequestParam String name,
             @RequestParam String abbreviation,
             @RequestParam String university,
-            Model model){
+            Model model) {
         User user = userRepository.findByUsername(u.getUsername());
         model.addAttribute("university", user.getUniversity());
         model.addAttribute("group", user.getGroup());
@@ -46,12 +41,11 @@ public class GroupController {
 
         groupService.addGroup(name, abbreviation, user, university);
 
-
         return "redirect:/group/control";
     }
 
     @GetMapping("/group/control")
-    public String groupControl(@AuthenticationPrincipal User u, Model model){
+    public String groupControl(@AuthenticationPrincipal User u, Model model) {
         User user = userRepository.findByUsername(u.getUsername());
         model.addAttribute("university", user.getUniversity());
         model.addAttribute("group", user.getGroup());
@@ -66,24 +60,17 @@ public class GroupController {
                 model.addAttribute("statements", user.getGroup().getStatements());
             }
         }
-
         return "groupControl";
     }
 
     @GetMapping("group/{user}")
     public String acceptState(@PathVariable User user,
-                              @AuthenticationPrincipal User o){
+                              @AuthenticationPrincipal User o) {
         User owner = userRepository.findByUsername(o.getUsername());
-        System.out.println(owner.getUsername());
-        System.out.println(owner.getGroup().getName());
-
-        System.out.println("===========================");
-        System.out.println(user.getUsername());
-
 
         Group group = owner.getGroup();
         groupService.deleteStutUserIntoGroup(group, user);
         groupService.addUserIntoGroup(group, user);
         return "redirect:/group/control";
     }
-    }
+}

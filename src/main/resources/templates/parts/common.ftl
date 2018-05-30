@@ -5,12 +5,13 @@
     <meta charset="UTF-8">
     <title>Grouper</title>
     <link rel="stylesheet" href="/static/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
           integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -28,17 +29,17 @@
 </head>
 <body>
 
-<#include "navbar.ftl">
+    <#include "navbar.ftl">
 <script>
-    $(function() {
-        $('.scrollup').click(function() {
+    $(function () {
+        $('.scrollup').click(function () {
             $("html, body").animate({
-                scrollTop:0
-            },1000);
+                scrollTop: 0
+            }, 1000);
         })
     })
-    $(window).scroll(function() {
-        if ($(this).scrollTop()>200) {
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 200) {
             $('.scrollup').fadeIn();
         }
         else {

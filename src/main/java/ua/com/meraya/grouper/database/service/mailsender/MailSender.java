@@ -1,4 +1,4 @@
-package ua.com.meraya.grouper.database.service;
+package ua.com.meraya.grouper.database.service.mailsender;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

@@ -1,8 +1,6 @@
 package ua.com.meraya.grouper.controller;
 
-import  org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -20,18 +18,20 @@ import java.util.Map;
 @RequestMapping("/data")
 public class DataController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+    private final UniversityService universityService;
 
-    @Autowired
-    private UniversityService universityService;
+    private int tab = 0;
 
-    private int swith = 0;
+    public DataController(UserService userService, UniversityService universityService) {
+        this.userService = userService;
+        this.universityService = universityService;
+    }
 
     @PreAuthorize("hasAuthority('SUPERUSER')")
     @GetMapping
-    public String userList(Model model){
-        switch (swith){
+    public String userList(Model model) {
+        switch (tab) {
             case 0:
                 model.addAttribute("select", "users");
                 List<User> users = userService.findAll();
@@ -58,14 +58,12 @@ public class DataController {
                 model.addAttribute("select", "group");
                 break;
         }
-
-
         return "dataList";
     }
 
     @PreAuthorize("hasAuthority('SUPERUSER')")
     @GetMapping("{user}")
-    public String userEditForm(@PathVariable User user, Model model){
+    public String userEditForm(@PathVariable User user, Model model) {
         model.addAttribute("user", user);
         model.addAttribute("roles", UserRole.values());
         return "editUser";
@@ -76,7 +74,7 @@ public class DataController {
     public String userSave(
             @RequestParam String username,
             @RequestParam Map<String, String> form,
-            @RequestParam("UserID") User user){
+            @RequestParam("UserID") User user) {
 
         userService.saveUser(user, username, form);
         return "redirect:/data";
@@ -84,22 +82,22 @@ public class DataController {
 
     @PreAuthorize("hasAuthority('SUPERUSER')")
     @GetMapping("user")
-    public String getUsers(){
-        swith = 0;
+    public String getUsers() {
+        tab = 0;
         return "redirect:/data";
     }
 
     @PreAuthorize("hasAuthority('SUPERUSER')")
     @GetMapping("university")
-    public String getUniversity(){
-        swith = 1;
+    public String getUniversities() {
+        tab = 1;
         return "redirect:/data";
     }
 
     @PreAuthorize("hasAuthority('SUPERUSER')")
     @GetMapping("group")
-    public String getGroup(){
-        swith = 2;
+    public String getGroups() {
+        tab = 2;
         return "redirect:/data";
     }
 }
