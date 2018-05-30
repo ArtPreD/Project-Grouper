@@ -9,6 +9,7 @@
 
 
         <#if teacher && group??>
+        <#if !blockControl>
         <#--Управление группой-->
 <div class="container">
     <hr>
@@ -96,10 +97,16 @@
 </div>
 
 </div>
-        <#--Управление группой-->
+        <#else>
+         <hr>
+       <h4 align="center">У ВАС НЕТ ПРАВ НА УПРАВЛЕНИЕ ЭТОЙ ГРУППОЙ</h4>
+        <hr>
+        </#if>
         </#if>
 
     <#else>
+
+        <#if !isStat>
                 <h6 align="center">У вас нет группы. Создать?</h6>
     <#--Создание группы-->
 <div class="container">
@@ -142,6 +149,11 @@
             </form>
         </#if>
     </div>
+        <#else>
+     <hr>
+       <h4 align="center">У ВАС ЕСТЬ ЗАЯВКА НА ВСТУПЛЕНИЕ</h4>
+        <hr>
+        </#if>
     </#if>
 </div>
 <#--Создание группы-->

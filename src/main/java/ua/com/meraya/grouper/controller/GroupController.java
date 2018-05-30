@@ -50,6 +50,7 @@ public class GroupController {
         model.addAttribute("university", user.getUniversity());
         model.addAttribute("group", user.getGroup());
         model.addAttribute("teacher", user.isTeacher());
+        model.addAttribute("isStat", user.isStat());
         if (user.getGroup() != null) {
             if (!user.getGroup().getStudents().isEmpty()) {
                 model.addAttribute("users", user.getGroup().getStudents());
@@ -58,6 +59,11 @@ public class GroupController {
             model.addAttribute("countStat", String.valueOf(user.getGroup().getStatements().size()));
             if (!user.getGroup().getStatements().isEmpty()) {
                 model.addAttribute("statements", user.getGroup().getStatements());
+            }
+            if(user.equals(user.getGroup().getTeacher())){
+                model.addAttribute("blockControl", false);
+            }else {
+                model.addAttribute("blockControl", true);
             }
         }
         return "groupControl";
