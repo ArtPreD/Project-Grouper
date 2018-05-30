@@ -29,7 +29,7 @@ public class UserService implements UserDetailsService{
     private PasswordEncoder passwordEncoder;
 
     public UserService(UserRepository userRepository, UniversityRepository universityRepository,
-                       MailSender mailSender, PasswordEncoder passwordEncoder) {
+                       MailSender mailSender) {
         this.userRepository = userRepository;
         this.universityRepository = universityRepository;
         this.mailSender = mailSender;
