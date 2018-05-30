@@ -110,12 +110,6 @@
             </div>
             </#if>
                         </div>
-                        <div class="form-group">
-                            <div class="custom-file">
-                                <input type="file" name="file" id="customFile">
-                                <label class="custom-file-label" for="customFile">Вибери изображение</label>
-                            </div>
-                        </div>
 
                         <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                         <div class="form-group">
@@ -129,11 +123,6 @@
         <div class="card-columns">
         <#list messages as message>
             <div class="card my-3">
-                <div>
-        <#if message.filename??>
-            <img class="card-img-top" src="/img/${message.filename}">
-        </#if>
-                </div>
                 <div class="m-2"
                 <i>${message.tag}:</i>
                 <span>${message.text}</span>

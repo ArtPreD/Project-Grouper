@@ -80,11 +80,11 @@ public class MainController {
     @PostMapping("/main")
     public String add(
             @AuthenticationPrincipal User u,
-            @RequestParam("file") MultipartFile file,
             @Valid Message message,
             BindingResult bindingResult,
             Model model
     ) throws IOException {
+        MultipartFile file = null;
         Date d = new Date();
         SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
         String date = format.format(d);
